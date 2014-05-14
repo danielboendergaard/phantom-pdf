@@ -1,6 +1,7 @@
 {
     "name": "danielboendergaard/phantom-pdf",
-    "description": "",
+    "description": "A Package for generating PDF files using PhantomJS",
+    "keywords": ["pdf", "html", "laravel"],
     "authors": [
         {
             "name": "Daniel Bøndergaard",
