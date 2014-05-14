@@ -1,0 +1,21 @@
+{
+    "name": "danielboendergaard/phantom-pdf",
+    "description": "",
+    "authors": [
+        {
+            "name": "Daniel Bøndergaard",
+            "email": "danielboendergaard@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/http-foundation": "~2.2",
+        "symfony/process": "~2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhantomPdf\\": "src"
+        }
+    },
+    "minimum-stability": "stable"
+}
