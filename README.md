@@ -43,3 +43,14 @@ class SampleController extends Controller {
 }
 ````
 
+##Usage outside Laravel
+
+````php
+
+$generator = new PdfGenerator;
+
+$generator->setStoragePath('path');
+
+return $generator->createFromView($html);
+
+````
