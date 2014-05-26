@@ -27,6 +27,11 @@ class PdfGenerator {
     protected $pdfPath;
 
     /**
+     * @var array
+     */
+    protected $commandLineOptions = [];
+
+    /**
      * Create a PDF from a view or string
      * @param string $view
      * @param string $filename
@@ -81,7 +86,9 @@ class PdfGenerator {
     {
         $this->saveHtml($view);
 
-        $command = __DIR__ . '/../bin/phantomjs generate-pdf.js '.$this->htmlPath.' '.$this->pdfPath;
+        $options = implode(' ', $this->commandLineOptions);
+
+        $command = __DIR__ . '/../bin/phantomjs generate-pdf.js '.$options.' '.$this->htmlPath.' '.$this->pdfPath;
 
         (new Process($command, __DIR__))->setTimeout(10)->run();
     }
@@ -135,5 +142,13 @@ class PdfGenerator {
     public function setStoragePath($path)
     {
         $this->storagePath = $path;
+    }
+
+    /**
+     * Ignore PhantomJS SSL errors
+     */
+    public function ignoreSSLErrors()
+    {
+        $this->commandLineOptions[] = '--ignore-ssl-errors=true';
     }
 }
