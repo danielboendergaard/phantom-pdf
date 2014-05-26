@@ -38,7 +38,7 @@ class SampleController extends Controller {
   {
     $view = View::make('index');
     
-    return PDF::createFromView($view);
+    return PDF::createFromView($view, 'filename.pdf');
   }
 }
 ````
