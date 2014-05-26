@@ -88,7 +88,7 @@ class PdfGenerator {
 
         $options = implode(' ', $this->commandLineOptions);
 
-        $command = __DIR__ . '/../bin/phantomjs generate-pdf.js '.$options.' '.$this->htmlPath.' '.$this->pdfPath;
+        $command = __DIR__ . '/../bin/phantomjs '.$options.' generate-pdf.js '.$this->htmlPath.' '.$this->pdfPath;
 
         (new Process($command, __DIR__))->setTimeout(10)->run();
     }
