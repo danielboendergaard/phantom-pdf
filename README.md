@@ -51,6 +51,6 @@ $generator = new PdfGenerator;
 
 $generator->setStoragePath('path');
 
-return $generator->createFromView($html);
+return $generator->createFromView($html, 'filename.pdf');
 
 ````
