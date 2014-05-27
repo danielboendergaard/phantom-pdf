@@ -1,18 +1,22 @@
-phantom-pdf
+Phantom PDF
 ===========
 
 A Package for generating PDF files using PhantomJS. The package is framework agnostic, but provides integration with Laravel 4.
+
+Notice: This package only works on 64-bit Linux operating systems.
 
 ##Installation
 Add `danielboendergaard/phantom-pdf` to your `composer.json` file.
 
 ````
 "require": {
-  "danielboendergaard/phantom-pdf": "dev-master"
+  "danielboendergaard/phantom-pdf": "0.*"
 }
 ````
 
 Then run `composer update`
+
+####Laravel Installation (optional)
 
 Add the service provider in the `providers` array in `app/config/app.php`
 ````
@@ -49,8 +53,9 @@ class SampleController extends Controller {
 
 $generator = new PdfGenerator;
 
-$generator->setStoragePath('path');
+$generator->setStoragePath('storage/path');
 
+// Returns a Symfony\Component\HttpFoundation\BinaryFileResponse
 return $generator->createFromView($html, 'filename.pdf');
 
 ````
