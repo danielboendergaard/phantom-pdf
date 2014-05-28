@@ -38,6 +38,8 @@ class PhantomPdfServiceProvider extends ServiceProvider {
 
             $generator->setStoragePath($this->app['config']['phantom-pdf::temporary_file_path']);
 
+            $generator->setTimeout($this->app['config']['phantom-pdf::timeout']);
+
             if ($this->app['config']['phantom-pdf::ignore_ssl_errors']) {
                 $generator->ignoreSSLErrors();
             }

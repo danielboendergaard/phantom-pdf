@@ -27,6 +27,11 @@ class PdfGenerator {
     protected $pdfPath;
 
     /**
+     * @var int
+     */
+    protected $timeout = 10;
+
+    /**
      * @var array
      */
     protected $commandLineOptions = [];
@@ -43,7 +48,7 @@ class PdfGenerator {
 
         $this->generatePdf($view);
 
-        return (new BinaryFileResponse($this->pdfPath, 200))->setContentDisposition('attachment', $filename);
+        return (new BinaryFileResponse($this->pdfPath))->setContentDisposition('attachment', $filename);
     }
 
     /**
@@ -90,7 +95,7 @@ class PdfGenerator {
 
         $command = __DIR__ . '/../bin/phantomjs '.$options.' generate-pdf.js '.$this->htmlPath.' '.$this->pdfPath;
 
-        (new Process($command, __DIR__))->setTimeout(10)->run();
+        (new Process($command, __DIR__))->setTimeout($this->timeout)->run();
     }
 
     /**
@@ -142,6 +147,14 @@ class PdfGenerator {
     public function setStoragePath($path)
     {
         $this->storagePath = $path;
+    }
+
+    /**
+     * @param int $seconds
+     */
+    public function setTimeout($seconds)
+    {
+        $this->timeout = $seconds;
     }
 
     /**

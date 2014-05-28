@@ -28,6 +28,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Phantom Process Timeout (Seconds)
+    |--------------------------------------------------------------------------
+    |
+    | PhantomJS is being executed in a separate process, here we can specify
+    | how long to wait for the process to finish before aborting.
+    |
+    */
+
+    'timeout' => 10,
+
+    /*
+    |--------------------------------------------------------------------------
     | Ignore SSL Errors
     |--------------------------------------------------------------------------
     |
