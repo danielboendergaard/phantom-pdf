@@ -2,6 +2,7 @@
 
 use Exception;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
 
 class PdfGenerator {
@@ -72,13 +73,11 @@ class PdfGenerator {
      */
     protected function validateStoragePath()
     {
-        if (is_null($this->storagePath))
-        {
+        if (is_null($this->storagePath)) {
             throw new Exception('A storage path has not been set');
         }
 
-        if ( ! is_dir($this->storagePath) || ! is_writable($this->storagePath))
-        {
+        if ( ! is_dir($this->storagePath) || ! is_writable($this->storagePath)) {
             throw new Exception('The specified storage path is not writable');
         }
     }
@@ -95,7 +94,13 @@ class PdfGenerator {
 
         $command = __DIR__ . '/../bin/phantomjs '.$options.' generate-pdf.js '.$this->htmlPath.' '.$this->pdfPath;
 
-        (new Process($command, __DIR__))->setTimeout($this->timeout)->run();
+        $process = new Process($command, __DIR__);
+        $process->setTimeout($this->timeout);
+        $process->run();
+
+        if ($errorOutput = $process->getErrorOutput()) {
+            throw new RuntimeException('PhantomJS: ' . $errorOutput);
+        }
     }
 
     /**
