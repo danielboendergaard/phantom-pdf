@@ -88,6 +88,8 @@ class PdfGenerator {
      */
     protected function generatePdf($view)
     {
+        $view = $this->viewToString($view);
+
         $this->saveHtml($view);
 
         $options = implode(' ', $this->commandLineOptions);
@@ -104,6 +106,17 @@ class PdfGenerator {
     }
 
     /**
+     * Convert the provided view to a string. The __toString method is called manually to be able to catch exceptions
+     * in the view which is not possible otherwise. https://bugs.php.net/bug.php?id=53648
+     * @param mixed $view
+     * @return string
+     */
+    protected function viewToString($view)
+    {
+        return is_object($view) ? $view->__toString() : $view;
+    }
+
+    /**
      * Save a string to a html file
      * @param string $html
      */
@@ -111,7 +124,7 @@ class PdfGenerator {
     {
         $html = $this->insertBaseTag($html);
 
-        file_put_contents($this->htmlPath, (string) $html);
+        file_put_contents($this->htmlPath, $html);
     }
 
     /**
