@@ -6,15 +6,7 @@ A Package for generating PDF files using PhantomJS. The package is framework agn
 Notice: This package only works on 64-bit Linux operating systems.
 
 ##Installation
-Add `danielboendergaard/phantom-pdf` to your `composer.json` file.
-
-````
-"require": {
-  "danielboendergaard/phantom-pdf": "0.*"
-}
-````
-
-Then run `composer update`
+Run `composer require danielboendergaard/phantom-pdf`
 
 ####Laravel 4 Installation (optional)
 
