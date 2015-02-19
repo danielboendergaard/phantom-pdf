@@ -16,7 +16,7 @@ Add `danielboendergaard/phantom-pdf` to your `composer.json` file.
 
 Then run `composer update`
 
-####Laravel Installation (optional)
+####Laravel 4 Installation (optional)
 
 Add the service provider in the `providers` array in `app/config/app.php`
 ````
@@ -26,7 +26,9 @@ Add the service provider in the `providers` array in `app/config/app.php`
 ]
 ````
 
-For Laravel 5 add `Laravel5ServiceProvider` in the `providers` array in `app/config/app.php`
+####Laravel 5 Installation (optional)
+
+Add `Laravel5ServiceProvider` in the `providers` array in `app/config/app.php`
 ````
 'providers' => [
   ...
@@ -34,7 +36,17 @@ For Laravel 5 add `Laravel5ServiceProvider` in the `providers` array in `app/con
 ]
 ````
 
-Lastly, add the facade to the `aliases` array in `app/config/app.php` (optional)
+Add `DeleteTemporaryFiles` in the list of middleware in `App\Http\Kernel.php`
+````
+protected $middleware = [
+  ...
+  'PhantomPdf\Laravel\DeleteTemporaryFiles'
+]
+````
+
+#### Laravel 4/5 Facade usage (optional)
+
+Add the facade to the `aliases` array in `app/config/app.php` (optional)
 ````
 'aliases' => [
   ...
