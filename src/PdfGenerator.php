@@ -182,4 +182,13 @@ class PdfGenerator {
     {
         $this->commandLineOptions[] = '--ignore-ssl-errors=true';
     }
+
+    /**
+     * Add a command line option for PhantomJS
+     * @param string $option
+     */
+    public function addCommandLineOption($option)
+    {
+        $this->commandLineOptions[] = $option;
+    }
 }

@@ -44,6 +44,11 @@ class PhantomPdfServiceProvider extends ServiceProvider {
                 $generator->ignoreSSLErrors();
             }
 
+            foreach ($this->app['config']['phantom-pdf::command_line_options'] as $option)
+            {
+                $generator->addCommandLineOption($option);
+            }
+
             $this->app->finish(function() use ($generator) {
                 $generator->deleteTempFiles();
             });

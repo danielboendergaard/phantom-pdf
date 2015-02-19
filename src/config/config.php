@@ -47,5 +47,21 @@ return [
     |
     */
 
-    'ignore_ssl_errors' => false
+    'ignore_ssl_errors' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | PhantomJS Command Line Options
+    |--------------------------------------------------------------------------
+    |
+    | Add list of wanted command line options for PhantomJS
+    | List of available options can be found here:
+    | http://phantomjs.org/api/command-line.html
+    |
+    */
+
+    'command_line_options' => [
+        //'--debug=true'
+    ]
+
 ];
