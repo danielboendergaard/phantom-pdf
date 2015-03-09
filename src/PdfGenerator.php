@@ -39,7 +39,7 @@ class PdfGenerator {
 
     /**
      * Create a PDF from a view or string
-     * @param string $view
+     * @param string|object $view
      * @param string $filename
      * @return BinaryFileResponse
      */
@@ -57,6 +57,20 @@ class PdfGenerator {
         }
 
         return $response;
+    }
+
+    /**
+     * Save a PDF file to the disk
+     * @param string|object $view
+     * @param string $path
+     */
+    public function saveFromView($view, $path)
+    {
+        $this->generateFilePaths();
+
+        $this->generatePdf($view);
+
+        rename($this->pdfPath, $path);
     }
 
     /**

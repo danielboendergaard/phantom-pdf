@@ -48,6 +48,13 @@ class SampleController extends Controller {
     
     return PDF::createFromView($view, 'filename.pdf');
   }
+
+  public function save()
+  {
+      $view = View::make('index');
+
+      PDF::saveFromView($view, 'path/filename.pdf');
+  }
 }
 ````
 
@@ -55,11 +62,15 @@ class SampleController extends Controller {
 
 ````php
 
-$generator = new PdfGenerator;
+$pdf = new PdfGenerator;
 
-$generator->setStoragePath('storage/path');
+// Set a writable path for temporary files
+$pdf->setStoragePath('storage/path');
+
+// Saves the PDF as a file
+$pdf->saveFromView($html, 'filename.pdf');
 
 // Returns a Symfony\Component\HttpFoundation\BinaryFileResponse
-return $generator->createFromView($html, 'filename.pdf');
+return $pdf->createFromView($html, 'filename.pdf');
 
 ````
