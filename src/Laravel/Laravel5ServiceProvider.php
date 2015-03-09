@@ -25,7 +25,7 @@ class Laravel5ServiceProvider extends ServiceProvider {
         {
             $generator = new PdfGenerator;
 
-            $generator->setBaseUrl($this->app['config']['phantom-pdf.base_url']);
+            $generator->setBaseUrl($this->app['config']['phantom-pdf.base_url'] ?: url());
 
             $generator->setStoragePath($this->app['config']['phantom-pdf.temporary_file_path']);
 
