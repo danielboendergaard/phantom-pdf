@@ -49,7 +49,14 @@ class PdfGenerator {
 
         $this->generatePdf($view);
 
-        return (new BinaryFileResponse($this->pdfPath))->setContentDisposition('attachment', $filename);
+        $response = (new BinaryFileResponse($this->pdfPath))
+            ->setContentDisposition('attachment', $filename);
+
+        if (method_exists($response, 'deleteFileAfterSend')) {
+            $response->deleteFileAfterSend(true);
+        }
+
+        return $response;
     }
 
     /**
@@ -103,6 +110,9 @@ class PdfGenerator {
         if ($errorOutput = $process->getErrorOutput()) {
             throw new RuntimeException('PhantomJS: ' . $errorOutput);
         }
+
+        // Remove temporary html file
+        @unlink($this->htmlPath);
     }
 
     /**
@@ -144,8 +154,6 @@ class PdfGenerator {
      */
     public function deleteTempFiles()
     {
-        @unlink($this->htmlPath);
-
         @unlink($this->pdfPath);
     }
 

@@ -10,7 +10,7 @@ Run `composer require danielboendergaard/phantom-pdf`
 
 ####Laravel 4 Installation (optional)
 
-Add the service provider in the `providers` array in `app/config/app.php`
+Add `PhantomPdfServiceProvider` in the `providers` array in `app/config/app.php`
 ````
 'providers' => [
   ...
@@ -20,19 +20,11 @@ Add the service provider in the `providers` array in `app/config/app.php`
 
 ####Laravel 5 Installation (optional)
 
-Add `Laravel5ServiceProvider` in the `providers` array in `app/config/app.php`
+Add `Laravel5ServiceProvider` in the `providers` array in `config/app.php`
 ````
 'providers' => [
   ...
   'PhantomPdf\Laravel\Laravel5ServiceProvider'
-]
-````
-
-Add `DeleteTemporaryFiles` in the list of middleware in `App\Http\Kernel.php`
-````
-protected $middleware = [
-  ...
-  'PhantomPdf\Laravel\DeleteTemporaryFiles'
 ]
 ````
 
