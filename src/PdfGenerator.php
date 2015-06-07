@@ -38,6 +38,11 @@ class PdfGenerator {
     protected $commandLineOptions = [];
 
     /**
+     * @var string
+     */
+    protected $convertScript = 'generate-pdf.js';
+
+    /**
      * Create a PDF from a view or string
      * @param string|object $view
      * @param string $filename
@@ -113,9 +118,13 @@ class PdfGenerator {
 
         $this->saveHtml($view);
 
-        $options = implode(' ', $this->commandLineOptions);
-
-        $command = __DIR__ . '/../bin/phantomjs '.$options.' generate-pdf.js '.$this->htmlPath.' '.$this->pdfPath;
+        $command = implode(' ', [
+            __DIR__ . '/../bin/phantomjs',
+            implode(' ', $this->commandLineOptions),
+            $this->convertScript,
+            $this->htmlPath,
+            $this->pdfPath
+        ]);
 
         $process = new Process($command, __DIR__);
         $process->setTimeout($this->timeout);
@@ -212,5 +221,14 @@ class PdfGenerator {
     public function addCommandLineOption($option)
     {
         $this->commandLineOptions[] = $option;
+    }
+
+    /**
+     * Use a custom script to be run via PhantomJS
+     * @param string $path
+     */
+    public function useScript($path)
+    {
+        $this->convertScript = $path;
     }
 }
