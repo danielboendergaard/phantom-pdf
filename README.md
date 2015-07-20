@@ -3,7 +3,7 @@ Phantom PDF
 
 A Package for generating PDF files using PhantomJS. The package is framework agnostic, but provides integration with Laravel 4/5.
 
-Notice: This package only works on 64-bit Linux operating systems.
+Notice: This package only ships with the 64-bit Linux version of PhantomJS. If you want to use it with another version you can reference it in the configuration.
 
 ##Installation
 Run `composer require danielboendergaard/phantom-pdf`
@@ -58,7 +58,7 @@ class SampleController extends Controller {
 }
 ````
 
-##Usage outside Laravel
+##General usage
 
 ````php
 
@@ -73,4 +73,14 @@ $pdf->saveFromView($html, 'filename.pdf');
 // Returns a Symfony\Component\HttpFoundation\BinaryFileResponse
 return $pdf->createFromView($html, 'filename.pdf');
 
+````
+
+Use `setBinaryPath('path')` to use another version of PhantomJS.
+
+###Customizing the conversion script
+If you want to use another script to execute with PhantomJS, this it how you do it.
+````php
+$pdf->useScript('path/to/script');
+
+return $pdf->saveFromView('view');
 ````
