@@ -1,4 +1,5 @@
-<?php namespace PhantomPdf;
+<?php
+namespace PhantomPdf;
 
 use Exception;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -11,6 +12,11 @@ class PdfGenerator {
      * @var string
      */
     protected $baseUrl;
+
+    /**
+     * @var string
+     */
+    protected $binaryPath;
 
     /**
      * @var string
@@ -119,7 +125,7 @@ class PdfGenerator {
         $this->saveHtml($view);
 
         $command = implode(' ', [
-            __DIR__ . '/../bin/phantomjs',
+            $this->binaryPath,
             implode(' ', $this->commandLineOptions),
             $this->convertScript,
             $this->htmlPath,
@@ -187,6 +193,15 @@ class PdfGenerator {
     public function setBaseUrl($url)
     {
         $this->baseUrl = $url;
+    }
+
+    /**
+     * Set the binary path
+     * @param string $path
+     */
+    public function setBinaryPath($path)
+    {
+        $this->binaryPath = $path;
     }
 
     /**

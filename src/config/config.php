@@ -52,6 +52,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | PhantomJS Binary Path
+    |--------------------------------------------------------------------------
+    |
+    | The path to the PhantomJS binary. This packages ships with the 64 bit linux build.
+    | If you want to use another version, reference it here.
+    |
+    */
+
+    'binary_path' => __DIR__ . '/../bin/phantomjs',
+
+    /*
+    |--------------------------------------------------------------------------
     | PhantomJS Command Line Options
     |--------------------------------------------------------------------------
     |

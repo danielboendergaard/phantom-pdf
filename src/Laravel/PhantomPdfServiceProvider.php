@@ -36,6 +36,8 @@ class PhantomPdfServiceProvider extends ServiceProvider {
 
             $generator->setBaseUrl($this->app['config']['phantom-pdf::base_url'] ?: url());
 
+            $generator->setBinaryPath($this->app['config']['phantom-pdf.binary_path']);
+
             $generator->setStoragePath($this->app['config']['phantom-pdf::temporary_file_path']);
 
             $generator->setTimeout($this->app['config']['phantom-pdf::timeout']);
