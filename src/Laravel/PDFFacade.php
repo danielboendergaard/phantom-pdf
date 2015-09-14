@@ -1,9 +1,10 @@
-<?php namespace PhantomPdf\Laravel;
+<?php
+namespace PhantomPdf\Laravel;
 
 use Illuminate\Support\Facades\Facade;
 
-class PDFFacade extends Facade {
-
+class PDFFacade extends Facade
+{
     /**
      * Get the registered name of the component.
      *
@@ -13,4 +14,4 @@ class PDFFacade extends Facade {
     {
         return 'phantom-pdf';
     }
-} 
+}

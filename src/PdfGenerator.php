@@ -6,8 +6,8 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
 
-class PdfGenerator {
-
+class PdfGenerator
+{
     /**
      * @var string
      */
@@ -109,7 +109,7 @@ class PdfGenerator {
             throw new Exception('A storage path has not been set');
         }
 
-        if ( ! is_dir($this->storagePath) || ! is_writable($this->storagePath)) {
+        if (! is_dir($this->storagePath) || ! is_writable($this->storagePath)) {
             throw new Exception('The specified storage path is not writable');
         }
     }
@@ -173,7 +173,9 @@ class PdfGenerator {
      */
     protected function insertBaseTag($view)
     {
-        if (is_null($this->baseUrl)) return $view;
+        if (is_null($this->baseUrl)) {
+            return $view;
+        }
 
         return str_replace('<head>', '<head><base href="'.$this->baseUrl.'">', $view);
     }
