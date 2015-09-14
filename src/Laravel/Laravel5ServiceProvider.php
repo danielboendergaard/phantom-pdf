@@ -39,6 +39,8 @@ class Laravel5ServiceProvider extends ServiceProvider
 
             return $generator;
         });
+
+        $this->app->alias('phantom-pdf', PdfGenerator::class);
     }
 
     /**
@@ -48,6 +50,6 @@ class Laravel5ServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['phantom-pdf'];
+        return ['phantom-pdf', PdfGenerator::class];
     }
 }
