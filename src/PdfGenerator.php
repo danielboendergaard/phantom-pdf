@@ -128,7 +128,7 @@ class PdfGenerator
             $this->binaryPath,
             implode(' ', $this->commandLineOptions),
             $this->convertScript,
-            $this->htmlPath,
+            $this->prefixHtmlPath($this->htmlPath),
             $this->pdfPath
         ]);
 
@@ -186,6 +186,20 @@ class PdfGenerator
     public function deleteTempFiles()
     {
         @unlink($this->pdfPath);
+    }
+
+    /**
+     * Prefix the input path for windows versions of PhantomJS
+     * @param string $path
+     * @return string
+     */
+    public function prefixHtmlPath($path)
+    {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            return 'file:///' . $path;
+        }
+
+        return $path;
     }
 
     /**
