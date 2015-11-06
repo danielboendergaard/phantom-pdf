@@ -57,7 +57,7 @@ class PdfGenerator
     {
         $this->generateFilePaths();
 
-        $this->generatePdf($view);
+        $this->generatePdf($this->viewToString($view));
 
         rename($this->pdfPath, $path);
     }
@@ -98,8 +98,6 @@ class PdfGenerator
      */
     protected function generatePdf($view)
     {
-        $view = $this->viewToString($view);
-
         $this->saveHtml($view);
 
         $command = implode(' ', [
@@ -119,7 +117,9 @@ class PdfGenerator
         }
 
         // Remove temporary html file
-        @unlink($this->htmlPath);
+        if (is_file($this->htmlPath)) {
+            unlink($this->htmlPath);
+        }
     }
 
     /**
@@ -163,7 +163,9 @@ class PdfGenerator
      */
     public function deleteTempFiles()
     {
-        @unlink($this->pdfPath);
+        if (is_file($this->pdfPath)) {
+            unlink($this->pdfPath);
+        }
     }
 
     /**
@@ -296,7 +298,7 @@ class PdfGenerator
     /**
      * @return string
      */
-    public function getConvertScript($value='')
+    public function getConvertScript()
     {
         return $this->convertScript;
     }
