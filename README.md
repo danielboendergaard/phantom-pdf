@@ -1,78 +1,30 @@
 Phantom PDF
 ===========
 
-A Package for generating PDF files using PhantomJS. The package is framework agnostic, but provides integration with Laravel 4/5.
-
-Notice: This package only ships with the 64-bit Linux version of PhantomJS. If you want to use it with another version you can reference it in the configuration.
+[![Build Status](https://travis-ci.org/clippings/phantom-pdf.png?branch=master)](https://travis-ci.org/clippings/phantom-pdf)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/clippings/phantom-pdf/badges/quality-score.png?s=a1404674f68c4894d651150caf4985aa59597515)](https://scrutinizer-ci.com/g/clippings/phantom-pdf/)
+[![Code Coverage](https://scrutinizer-ci.com/g/clippings/phantom-pdf/badges/coverage.png?s=3d5fb55c42c6887679915320658b543ed935e00a)](https://scrutinizer-ci.com/g/clippings/phantom-pdf/)
+[![Latest Stable Version](https://poser.pugx.org/clippings/phantom-pdf/v/stable.png)](https://packagist.org/packages/clippings/phantom-pdf)
 
 ##Installation
-Run `composer require danielboendergaard/phantom-pdf`
 
-####Laravel 4 Installation (optional)
+Install via composer
 
-Add `PhantomPdfServiceProvider` in the `providers` array in `app/config/app.php`
-````
-'providers' => [
-  ...
-  'PhantomPdf\Laravel\PhantomPdfServiceProvider'
-]
-````
+```
+$ composer global require clippings/composer-init
+```
 
-####Laravel 5 Installation (optional)
-
-Add `Laravel5ServiceProvider` in the `providers` array in `config/app.php`
-````
-'providers' => [
-  ...
-  'PhantomPdf\Laravel\Laravel5ServiceProvider'
-]
-````
-
-#### Laravel 4/5 Facade usage (optional)
-
-Add the facade to the `aliases` array in `app/config/app.php` (optional)
-````
-'aliases' => [
-  ...
-  'PDF' => 'PhantomPdf\Laravel\PDFFacade'
-]
-````
-
-##Usage with Laravel
-````php
-class SampleController extends Controller {
-
-  public function index()
-  {
-    $view = View::make('index');
-    
-    return PDF::createFromView($view, 'filename.pdf');
-  }
-
-  public function save()
-  {
-      $view = View::make('index');
-
-      PDF::saveFromView($view, 'path/filename.pdf');
-  }
-}
-````
-
-##General usage
+##Usage
 
 ````php
 
-$pdf = new PdfGenerator;
+$pdf = new PdfGenerator();
 
 // Set a writable path for temporary files
 $pdf->setStoragePath('storage/path');
 
 // Saves the PDF as a file
 $pdf->saveFromView($html, 'filename.pdf');
-
-// Returns a Symfony\Component\HttpFoundation\BinaryFileResponse
-return $pdf->createFromView($html, 'filename.pdf');
-
 ````
 
 Use `setBinaryPath('path')` to use another version of PhantomJS.
