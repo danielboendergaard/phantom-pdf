@@ -162,7 +162,7 @@ class PdfGeneratorTest extends PHPUnit_Framework_TestCase
 
         $this->setExpectedException(
             'Symfony\Component\Process\Exception\RuntimeException',
-            'PhantomJS: sh: phantomjs-not-found: command not found'
+            'PhantomJS: sh: phantomjs-not-found:'
         );
 
         $generator->saveFromView('test', $this->files.'no.pdf');
