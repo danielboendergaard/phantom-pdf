@@ -1,23 +1,30 @@
 {
-    "name": "danielboendergaard/phantom-pdf",
+    "name": "clippings/phantom-pdf",
     "description": "A Package for generating PDF files using PhantomJS",
-    "keywords": ["pdf", "html", "laravel"],
+    "keywords": ["pdf", "html", "phantomjs"],
     "license": "MIT",
     "authors": [
         {
             "name": "Daniel Bøndergaard",
             "email": "danielboendergaard@gmail.com"
+        },
+        {
+            "name": "Ivan Kerin",
+            "email": "ikerin@gmail.com"
         }
     ],
     "require": {
         "php": ">=5.4.0",
-        "symfony/http-foundation": "~2.2",
-        "symfony/process": "~2.2"
+        "symfony/process": "^2.2"
     },
     "autoload": {
         "psr-4": {
             "PhantomPdf\\": "src"
         }
     },
-    "minimum-stability": "stable"
+    "autoload-dev": {
+        "psr-4": {
+            "PhantomPdf\\Test\\": "tests/src"
+        }
+    }
 }
