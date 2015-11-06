@@ -31,7 +31,7 @@ class PdfGeneratorTest extends PHPUnit_Framework_TestCase
         $this->files = __DIR__.'/../files/';
 
         foreach (new DirectoryIterator($this->files) as $fileInfo) {
-            if (false === $fileInfo->isDot()) {
+            if ('.' !== $fileInfo->getFilename()[0]) {
                 unlink($fileInfo->getPathname());
             }
         }
