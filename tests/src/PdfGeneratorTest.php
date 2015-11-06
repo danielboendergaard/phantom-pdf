@@ -120,7 +120,6 @@ class PdfGeneratorTest extends PHPUnit_Framework_TestCase
      * @covers ::viewToString
      * @covers ::saveHtml
      * @covers ::insertBaseTag
-     * @covers ::deleteTempFiles
      * @covers ::prefixHtmlPath
      */
     public function testPdfGeneration()
@@ -135,7 +134,6 @@ class PdfGeneratorTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers ::insertBaseTag
-     * @covers ::deleteTempFiles
      */
     public function testBaseTag()
     {
@@ -145,7 +143,6 @@ class PdfGeneratorTest extends PHPUnit_Framework_TestCase
             ->setBaseUrl('http://example.com/test');
 
         $generator->saveFromView($this->testHtml, $this->files.'converted-test2.pdf');
-        $generator->deleteTempFiles();
 
         $this->assertFileExists($this->files.'converted-test2.pdf');
     }
@@ -169,7 +166,7 @@ class PdfGeneratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::generatePdf
+     * @covers ::validateStoragePath
      */
     public function testNoStoragePath()
     {
@@ -184,7 +181,7 @@ class PdfGeneratorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers ::generatePdf
+     * @covers ::validateStoragePath
      */
     public function testBadStoragePath()
     {

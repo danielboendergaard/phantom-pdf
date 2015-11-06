@@ -64,7 +64,7 @@ class PdfGenerator
 
     /**
      * Generate paths for the temporary files
-     * @throws \Exception
+     * @throws Exception
      */
     protected function generateFilePaths()
     {
@@ -156,16 +156,6 @@ class PdfGenerator
         }
 
         return str_replace('<head>', '<head><base href="'.$this->baseUrl.'">', $view);
-    }
-
-    /**
-     * Delete temporary files
-     */
-    public function deleteTempFiles()
-    {
-        if (is_file($this->pdfPath)) {
-            unlink($this->pdfPath);
-        }
     }
 
     /**
