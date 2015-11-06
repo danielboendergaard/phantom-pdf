@@ -1,8 +1,8 @@
 <?php
+
 namespace PhantomPdf;
 
 use Exception;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
 
@@ -47,28 +47,6 @@ class PdfGenerator
      * @var string
      */
     protected $convertScript = 'generate-pdf.js';
-
-    /**
-     * Create a PDF from a view or string
-     * @param string|object $view
-     * @param string $filename
-     * @return BinaryFileResponse
-     */
-    public function createFromView($view, $filename)
-    {
-        $this->generateFilePaths();
-
-        $this->generatePdf($view);
-
-        $response = (new BinaryFileResponse($this->pdfPath))
-            ->setContentDisposition('attachment', $filename);
-
-        if (method_exists($response, 'deleteFileAfterSend')) {
-            $response->deleteFileAfterSend(true);
-        }
-
-        return $response;
-    }
 
     /**
      * Save a PDF file to the disk
