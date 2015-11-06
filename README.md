@@ -18,7 +18,7 @@ $ composer global require clippings/composer-init
 Usage
 -----
 
-````php
+```php
 $pdf = new PdfGenerator();
 
 // Set a writable path for temporary files
@@ -26,7 +26,7 @@ $pdf->setStoragePath('storage/path');
 
 // Saves the PDF as a file
 $pdf->saveFromView($html, 'filename.pdf');
-````
+```
 
 Use `setBinaryPath('path')` to use another version of PhantomJS.
 
@@ -34,11 +34,11 @@ Customizing the conversion script
 ---------------------------------
 
 If you want to use another script to execute with PhantomJS, this it how you do it.
-````php
+```php
 $pdf->useScript('path/to/script');
 
 return $pdf->saveFromView('view');
-````
+```
 
 Credits
 -------
