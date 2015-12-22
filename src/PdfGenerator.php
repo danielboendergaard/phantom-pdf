@@ -1,8 +1,8 @@
 <?php
+
 namespace PhantomPdf;
 
 use Exception;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
 
@@ -16,7 +16,7 @@ class PdfGenerator
     /**
      * @var string
      */
-    protected $binaryPath;
+    protected $binaryPath = 'phantomjs';
 
     /**
      * @var string
@@ -49,26 +49,9 @@ class PdfGenerator
     protected $convertScript = 'generate-pdf.js';
 
     /**
-     * Create a PDF from a view or string
-     * @param string|object $view
-     * @param string $filename
-     * @return BinaryFileResponse
+     * @var string
      */
-    public function createFromView($view, $filename)
-    {
-        $this->generateFilePaths();
-
-        $this->generatePdf($view);
-
-        $response = (new BinaryFileResponse($this->pdfPath))
-            ->setContentDisposition('attachment', $filename);
-
-        if (method_exists($response, 'deleteFileAfterSend')) {
-            $response->deleteFileAfterSend(true);
-        }
-
-        return $response;
-    }
+    protected $orientation = 'portrait';
 
     /**
      * Save a PDF file to the disk
@@ -79,14 +62,14 @@ class PdfGenerator
     {
         $this->generateFilePaths();
 
-        $this->generatePdf($view);
+        $this->generatePdf($this->viewToString($view));
 
         rename($this->pdfPath, $path);
     }
 
     /**
      * Generate paths for the temporary files
-     * @throws \Exception
+     * @throws Exception
      */
     protected function generateFilePaths()
     {
@@ -120,8 +103,6 @@ class PdfGenerator
      */
     protected function generatePdf($view)
     {
-        $view = $this->viewToString($view);
-
         $this->saveHtml($view);
 
         $command = implode(' ', [
@@ -129,7 +110,8 @@ class PdfGenerator
             implode(' ', $this->commandLineOptions),
             $this->convertScript,
             $this->prefixHtmlPath($this->htmlPath),
-            $this->pdfPath
+            $this->pdfPath,
+            $this->orientation
         ]);
 
         $process = new Process($command, __DIR__);
@@ -141,7 +123,9 @@ class PdfGenerator
         }
 
         // Remove temporary html file
-        @unlink($this->htmlPath);
+        if (is_file($this->htmlPath)) {
+            unlink($this->htmlPath);
+        }
     }
 
     /**
@@ -181,14 +165,6 @@ class PdfGenerator
     }
 
     /**
-     * Delete temporary files
-     */
-    public function deleteTempFiles()
-    {
-        @unlink($this->pdfPath);
-    }
-
-    /**
      * Prefix the input path for windows versions of PhantomJS
      * @param string $path
      * @return string
@@ -205,61 +181,140 @@ class PdfGenerator
     /**
      * Set the base url for the base tag
      * @param string $url
+     * @return self
      */
     public function setBaseUrl($url)
     {
         $this->baseUrl = $url;
+
+        return $this;
+    }
+
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
     }
 
     /**
      * Set the binary path
      * @param string $path
+     * @return self
      */
     public function setBinaryPath($path)
     {
         $this->binaryPath = $path;
+
+        return $this;
+    }
+
+    public function getBinaryPath()
+    {
+        return $this->binaryPath;
     }
 
     /**
      * Set the storage path for temporary files
      * @param string $path
+     * @return self
      */
     public function setStoragePath($path)
     {
         $this->storagePath = $path;
+
+        return $this;
+    }
+
+    public function getStoragePath()
+    {
+        return $this->storagePath;
     }
 
     /**
-     * @param int $seconds
+     * @param  int $seconds
+     * @return self
      */
     public function setTimeout($seconds)
     {
-        $this->timeout = $seconds;
+        $this->timeout = (int) $seconds;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimeout()
+    {
+        return $this->timeout;
     }
 
     /**
      * Ignore PhantomJS SSL errors
+     * @return self
      */
     public function ignoreSSLErrors()
     {
         $this->commandLineOptions[] = '--ignore-ssl-errors=true';
+
+        return $this;
     }
 
     /**
      * Add a command line option for PhantomJS
      * @param string $option
+     * @return self
      */
     public function addCommandLineOption($option)
     {
         $this->commandLineOptions[] = $option;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCommandLineOptions()
+    {
+        return $this->commandLineOptions;
     }
 
     /**
      * Use a custom script to be run via PhantomJS
      * @param string $path
+     * @return self
      */
-    public function useScript($path)
+    public function setConvertScript($path)
     {
         $this->convertScript = $path;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConvertScript()
+    {
+        return $this->convertScript;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrientation()
+    {
+        return $this->orientation;
+    }
+
+    /**
+     * @param string $orientation
+     * @return self
+     */
+    public function setOrientation($orientation)
+    {
+        $this->orientation = $orientation;
+
+        return $this;
     }
 }

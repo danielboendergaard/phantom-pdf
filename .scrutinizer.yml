@@ -1,0 +1,14 @@
+filter:
+  paths: [src/*]
+
+tools:
+  php_code_sniffer:
+    config:
+      standard: PSR2
+  php_cs_fixer:
+    config: { level: all }
+  external_code_coverage: true
+  php_cpd: true
+  php_hhvm: true
+  php_analyzer: true
+  php_pdepend: true
