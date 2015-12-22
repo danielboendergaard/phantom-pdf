@@ -2,7 +2,7 @@ var fs = require('fs'),
     args = require('system').args,
     page = require('webpage').create();
 
-page.paperSize = {format: 'A4', orientation: 'portrait', margin: '1cm'};
+page.paperSize = {format: 'A4', orientation: args[3], margin: '1cm'};
 
 page.open(args[1], function (status) {
     if (status !== 'success') {

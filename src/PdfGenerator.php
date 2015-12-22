@@ -49,6 +49,11 @@ class PdfGenerator
     protected $convertScript = 'generate-pdf.js';
 
     /**
+     * @var string
+     */
+    protected $orientation = 'portrait';
+
+    /**
      * Save a PDF file to the disk
      * @param string|object $view
      * @param string $path
@@ -105,7 +110,8 @@ class PdfGenerator
             implode(' ', $this->commandLineOptions),
             $this->convertScript,
             $this->prefixHtmlPath($this->htmlPath),
-            $this->pdfPath
+            $this->pdfPath,
+            $this->orientation
         ]);
 
         $process = new Process($command, __DIR__);
@@ -291,5 +297,24 @@ class PdfGenerator
     public function getConvertScript()
     {
         return $this->convertScript;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrientation()
+    {
+        return $this->orientation;
+    }
+
+    /**
+     * @param string $orientation
+     * @return self
+     */
+    public function setOrientation($orientation)
+    {
+        $this->orientation = $orientation;
+
+        return $this;
     }
 }
