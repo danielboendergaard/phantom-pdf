@@ -1,4 +1,5 @@
 <?php
+
 namespace PhantomPdf\Laravel;
 
 use Illuminate\Support\Facades\Facade;

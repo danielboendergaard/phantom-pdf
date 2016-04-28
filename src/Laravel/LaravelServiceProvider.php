@@ -1,10 +1,11 @@
 <?php
+
 namespace PhantomPdf\Laravel;
 
 use Illuminate\Support\ServiceProvider;
 use PhantomPdf\PdfGenerator;
 
-class Laravel5ServiceProvider extends ServiceProvider
+class LaravelServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -24,13 +25,9 @@ class Laravel5ServiceProvider extends ServiceProvider
 
         $this->app->singleton('phantom-pdf', function () {
             $generator = new PdfGenerator;
-
             $generator->setBaseUrl($this->app['config']['phantom-pdf.base_url'] ?: url('/'));
-
             $generator->setBinaryPath($this->app['config']['phantom-pdf.binary_path']);
-
             $generator->setStoragePath($this->app['config']['phantom-pdf.temporary_file_path']);
-
             $generator->setTimeout($this->app['config']['phantom-pdf.timeout']);
 
             foreach ($this->app['config']['phantom-pdf.command_line_options'] as $option) {

@@ -1,4 +1,5 @@
 <?php
+
 namespace PhantomPdf;
 
 use Exception;
@@ -57,17 +58,11 @@ class PdfGenerator
     public function createFromView($view, $filename)
     {
         $this->generateFilePaths();
-
         $this->generatePdf($view);
 
-        $response = (new BinaryFileResponse($this->pdfPath))
-            ->setContentDisposition('attachment', $filename);
-
-        if (method_exists($response, 'deleteFileAfterSend')) {
-            $response->deleteFileAfterSend(true);
-        }
-
-        return $response;
+        return (new BinaryFileResponse($this->pdfPath))
+            ->setContentDisposition('attachment', $filename)
+            ->deleteFileAfterSend(true);
     }
 
     /**
@@ -78,7 +73,6 @@ class PdfGenerator
     public function saveFromView($view, $path)
     {
         $this->generateFilePaths();
-
         $this->generatePdf($view);
 
         rename($this->pdfPath, $path);
@@ -95,7 +89,6 @@ class PdfGenerator
         $path = $this->storagePath . DIRECTORY_SEPARATOR;
 
         $this->htmlPath = $path . uniqid('pdf-', true).'.html';
-
         $this->pdfPath = $path . uniqid('html-', true) . '.pdf';
     }
 
@@ -121,11 +114,10 @@ class PdfGenerator
     protected function generatePdf($view)
     {
         $view = $this->viewToString($view);
-
         $this->saveHtml($view);
 
         $command = implode(' ', [
-            $this->binaryPath,
+            $this->getBinaryPath(),
             implode(' ', $this->commandLineOptions),
             $this->convertScript,
             $this->prefixHtmlPath($this->htmlPath),
@@ -161,9 +153,7 @@ class PdfGenerator
      */
     protected function saveHtml($html)
     {
-        $html = $this->insertBaseTag($html);
-
-        file_put_contents($this->htmlPath, $html);
+        file_put_contents($this->htmlPath, $this->insertBaseTag($html));
     }
 
     /**
@@ -221,6 +211,19 @@ class PdfGenerator
     }
 
     /**
+     * Get the binary path
+     * @return string
+     */
+    public function getBinaryPath()
+    {
+        if (is_null($this->binaryPath)) {
+            return __DIR__ . '/../bin/phantomjs';
+        }
+
+        return $this->binaryPath;
+    }
+
+    /**
      * Set the storage path for temporary files
      * @param string $path
      */
@@ -235,14 +238,6 @@ class PdfGenerator
     public function setTimeout($seconds)
     {
         $this->timeout = $seconds;
-    }
-
-    /**
-     * Ignore PhantomJS SSL errors
-     */
-    public function ignoreSSLErrors()
-    {
-        $this->commandLineOptions[] = '--ignore-ssl-errors=true';
     }
 
     /**

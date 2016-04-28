@@ -40,18 +40,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Ignore SSL Errors (Deprecated - disabled in Laravel 5)
-    |--------------------------------------------------------------------------
-    |
-    | Ignore SSL errors, such as expired or self-signed certificate errors.
-    | Deprecated - add '--ignore-ssl-errors=true' to command line options instead
-    |
-    */
-
-    'ignore_ssl_errors' => false,
-
-    /*
-    |--------------------------------------------------------------------------
     | PhantomJS Binary Path
     |--------------------------------------------------------------------------
     |
