@@ -36,7 +36,9 @@ If you want to use another script to execute with PhantomJS, this it how you do 
 $pdf->useScript('`/path/to/script');
 ````
 
-####Laravel 5 Installation
+##Laravel integration
+
+###Installation
 
 For Laravel 4, use the 0.10.0 branch
 
@@ -48,7 +50,7 @@ Add `LaravelServiceProvider` in the `providers` array in `config/app.php`
 ]
 ````
 
-#### Laravel Facade usage (optional)
+#### Facades (optional)
 
 Add the facade to the `aliases` array in `app/config/app.php` (optional)
 ````
@@ -58,7 +60,7 @@ Add the facade to the `aliases` array in `app/config/app.php` (optional)
 ]
 ````
 
-##Usage with Laravel
+##Usage
 ````php
 class SampleController extends Controller {
 
