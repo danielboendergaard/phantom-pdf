@@ -8,7 +8,7 @@ Notice: This package only ships with the 64-bit Linux version of PhantomJS. If y
 ##Installation
 Run `composer require danielboendergaard/phantom-pdf`
 
-##Usage
+###Usage
 
 ````php
 $pdf = new PdfGenerator;
@@ -60,7 +60,7 @@ Add the facade to the `aliases` array in `app/config/app.php` (optional)
 ]
 ````
 
-##Usage
+###Usage
 ````php
 class SampleController extends Controller {
 
