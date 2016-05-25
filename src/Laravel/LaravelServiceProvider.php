@@ -30,6 +30,10 @@ class LaravelServiceProvider extends ServiceProvider
             $generator->setStoragePath($this->app['config']['phantom-pdf.temporary_file_path']);
             $generator->setTimeout($this->app['config']['phantom-pdf.timeout']);
 
+            if ($this->app['config']['phantom-pdf.conversion_script']) {
+                $generator->useScript($this->app['config']['phantom-pdf.conversion_script']);
+            }
+            
             foreach ($this->app['config']['phantom-pdf.command_line_options'] as $option) {
                 $generator->addCommandLineOption($option);
             }
