@@ -43,22 +43,22 @@ $pdf->useScript('`/path/to/script');
 For Laravel 4, use the 0.10.0 branch
 
 Add `LaravelServiceProvider` in the `providers` array in `config/app.php`
-````
+```php
 'providers' => [
   ...
   'PhantomPdf\Laravel\LaravelServiceProvider'
 ]
-````
+```
 
 #### Facades (optional)
 
 Add the facade to the `aliases` array in `app/config/app.php` (optional)
-````
+```php
 'aliases' => [
   ...
   'PDF' => 'PhantomPdf\Laravel\PDFFacade'
 ]
-````
+```
 
 ###Usage
 ````php
