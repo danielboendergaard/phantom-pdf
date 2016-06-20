@@ -10,7 +10,7 @@ Run `composer require danielboendergaard/phantom-pdf`
 
 ###Usage
 
-````php
+```php
 $pdf = new PdfGenerator;
 
 // Set a writable path for temporary files
@@ -22,19 +22,19 @@ $pdf->saveFromView($html, 'filename.pdf');
 // Returns a Symfony\Component\HttpFoundation\BinaryFileResponse
 return $pdf->createFromView($html, 'filename.pdf');
 
-````
+```
 
 ### PhantomJS Version
 This package uses PhantomJS 1.9.8 x64 which is included in the package. If you want to use another version its easy
-````php
+```php
 $pdf->setBinaryPath('/some/path/phantomjs');
-````
+```
 
 ###Customizing the conversion script
 If you want to use another script to execute with PhantomJS, this it how you do it.
-````php
+```php
 $pdf->useScript('`/path/to/script');
-````
+```
 
 ##Laravel integration
 
@@ -45,7 +45,6 @@ For Laravel 4, use the 0.10.0 branch
 Add `LaravelServiceProvider` in the `providers` array in `config/app.php`
 ```php
 'providers' => [
-  ...
   'PhantomPdf\Laravel\LaravelServiceProvider'
 ]
 ```
@@ -55,13 +54,12 @@ Add `LaravelServiceProvider` in the `providers` array in `config/app.php`
 Add the facade to the `aliases` array in `app/config/app.php` (optional)
 ```php
 'aliases' => [
-  ...
   'PDF' => 'PhantomPdf\Laravel\PDFFacade'
 ]
 ```
 
 ###Usage
-````php
+```php
 class SampleController extends Controller {
 
   public function index()
@@ -81,4 +79,4 @@ class SampleController extends Controller {
     return $pdf->createFromView(view('path'), 'filename.pdf');
   }
 }
-````
+```
