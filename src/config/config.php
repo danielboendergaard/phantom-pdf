@@ -20,11 +20,11 @@ return [
     |
     | Since the HTML file that is loaded into PhantomJS is loaded from the file system,
     | any relative references to assets will not work. We fix this by adding a base tag
-    | to the html file.
+    | to the html file. Set to null to skip the base tag entirely or "/" to set to base path
     |
     */
 
-    'base_url' => url('/'),
+    'base_url' => '/',
 
     /*
     |--------------------------------------------------------------------------

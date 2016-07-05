@@ -25,7 +25,9 @@ class LaravelServiceProvider extends ServiceProvider
 
         $this->app->singleton('phantom-pdf', function () {
             $generator = new PdfGenerator;
-            $generator->setBaseUrl($this->app['config']['phantom-pdf.base_url']);
+
+            $baseUrl = $this->app['config']['phantom-pdf.base_url'];
+            $generator->setBaseUrl(is_null($baseUrl) ? null : url($baseUrl));
             $generator->setBinaryPath($this->app['config']['phantom-pdf.binary_path']);
             $generator->setStoragePath($this->app['config']['phantom-pdf.temporary_file_path']);
             $generator->setTimeout($this->app['config']['phantom-pdf.timeout']);
