@@ -5,10 +5,10 @@ A Package for generating PDF files using PhantomJS. The package is framework agn
 
 Notice: This package only ships with the 64-bit Linux version of PhantomJS. If you want to use it with another version you can reference it in the configuration.
 
-##Installation
+## Installation
 Run `composer require danielboendergaard/phantom-pdf`
 
-###Usage
+### Usage
 
 ```php
 $pdf = new PdfGenerator;
@@ -30,22 +30,22 @@ This package uses PhantomJS 1.9.8 x64 which is included in the package. If you w
 $pdf->setBinaryPath('/some/path/phantomjs');
 ```
 
-###Customizing the conversion script
+### Customizing the conversion script
 If you want to use another script to execute with PhantomJS, this it how you do it.
 ```php
 $pdf->useScript('`/path/to/script');
 ```
 
-##Laravel integration
+## Laravel integration
 
-###Installation
+### Installation
 
 For Laravel 4, use the 0.10.0 branch
 
 Add `LaravelServiceProvider` in the `providers` array in `config/app.php`
 ```php
 'providers' => [
-  'PhantomPdf\Laravel\LaravelServiceProvider'
+  PhantomPdf\Laravel\LaravelServiceProvider::class,
 ]
 ```
 
@@ -54,14 +54,14 @@ Add `LaravelServiceProvider` in the `providers` array in `config/app.php`
 Add the facade to the `aliases` array in `app/config/app.php` (optional)
 ```php
 'aliases' => [
-  'PDF' => 'PhantomPdf\Laravel\PDFFacade'
+  'PDF' => PhantomPdf\Laravel\PDFFacade::class,
 ]
 ```
 
-###Usage
+### Usage
 ```php
-class SampleController extends Controller {
-
+class SampleController extends Controller
+{
   public function index()
   {
     return PDF::createFromView(view('index'), 'filename.pdf');
