@@ -63,7 +63,7 @@ class PdfGenerator
 
         $contentDisposition = $inline ? 'inline' : 'attachment';
         return (new BinaryFileResponse($this->pdfPath))
-            ->setContentDisposition($contentDisposition, $filename);
+            ->setContentDisposition($contentDisposition, $filename)
             ->deleteFileAfterSend(true);
     }
 
