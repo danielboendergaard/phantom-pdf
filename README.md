@@ -25,7 +25,7 @@ return $pdf->createFromView($html, 'filename.pdf');
 ```
 
 ### PhantomJS Version
-This package uses PhantomJS 1.9.8 x64 which is included in the package. If you want to use another version its easy
+This package uses PhantomJS 1.9.8 x64 which is included in the package. If you want to use another version it's easy.
 ```php
 $pdf->setBinaryPath('/some/path/phantomjs');
 ```
@@ -40,7 +40,9 @@ $pdf->useScript('`/path/to/script');
 
 ### Installation
 
-For Laravel 4, use the 0.10.0 branch
+#### For Laravel 5.5 the package supports auto discovery and don't need any configuration.
+
+For Laravel 4, use the 0.10.0 branch.
 
 Add `LaravelServiceProvider` in the `providers` array in `config/app.php`
 ```php
