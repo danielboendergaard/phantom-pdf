@@ -53,15 +53,17 @@ class PdfGenerator
      * Create a PDF from a view or string
      * @param string|object $view
      * @param string $filename
+     * @param bool $inline
      * @return BinaryFileResponse
      */
-    public function createFromView($view, $filename)
+    public function createFromView($view, $filename, $inline = false)
     {
         $this->generateFilePaths();
         $this->generatePdf($view);
 
+        $contentDisposition = $inline ? 'inline' : 'attachment';
         return (new BinaryFileResponse($this->pdfPath))
-            ->setContentDisposition('attachment', $filename)
+            ->setContentDisposition($contentDisposition, $filename)
             ->deleteFileAfterSend(true);
     }
 
