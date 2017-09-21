@@ -19,5 +19,15 @@
             "PhantomPdf\\": "src"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PhantomPdf\\Laravel\\LaravelServiceProvider"
+            ],
+            "aliases": {
+                "PDF": "PhantomPdf\\Laravel\\PDFFacade"
+            }
+        }
+    },
     "minimum-stability": "stable"
 }
