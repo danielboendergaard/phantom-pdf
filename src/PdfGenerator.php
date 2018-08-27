@@ -45,6 +45,11 @@ class PdfGenerator
     protected $commandLineOptions = [];
 
     /**
+     * @var array
+     */
+    protected $commandLineArguments = [];
+
+    /**
      * @var string
      */
     protected $convertScript = 'generate-pdf.js';
@@ -123,7 +128,8 @@ class PdfGenerator
             implode(' ', $this->commandLineOptions),
             $this->convertScript,
             $this->prefixHtmlPath($this->htmlPath),
-            $this->pdfPath
+            $this->pdfPath,
+            implode(' ', $this->commandLineArguments),
         ]);
 
         $process = new Process($command, __DIR__);
@@ -249,6 +255,15 @@ class PdfGenerator
     public function addCommandLineOption($option)
     {
         $this->commandLineOptions[] = $option;
+    }
+
+    /**
+     * Add a command line arg for PhantomJS
+     * @param string $arg
+     */
+    public function addCommandLineArgument($arg)
+    {
+        $this->commandLineArguments[] = $arg;
     }
 
     /**
