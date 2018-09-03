@@ -267,6 +267,14 @@ class PdfGenerator
     }
 
     /**
+     * Clear all applied command line arg for PhantomJS
+     */
+    public function clearCommandLineArguments()
+    {
+        $this->commandLineArguments = [];
+    }
+
+    /**
      * Use a custom script to be run via PhantomJS
      * @param string $path
      */
