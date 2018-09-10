@@ -23,7 +23,7 @@ class LaravelServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'phantom-pdf');
 
-        $this->app->singleton('phantom-pdf', function () {
+        $this->app->bind('phantom-pdf', function () {
             $generator = new PdfGenerator;
 
             $baseUrl = $this->app['config']['phantom-pdf.base_url'];
