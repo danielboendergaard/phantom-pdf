@@ -132,7 +132,7 @@ class PdfGenerator
             implode(' ', $this->commandLineArguments),
         ]);
 
-        $process = new Process($command, __DIR__);
+        $process = Process::fromShellCommandline($command, __DIR__);
         $process->setTimeout($this->timeout);
         $process->run();
 
